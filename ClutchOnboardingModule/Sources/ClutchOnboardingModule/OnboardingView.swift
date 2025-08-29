@@ -9,20 +9,12 @@ import SwiftUI
 
 import SwiftUI
 
-struct OnboardingPage {
-    let image: String
-    let title: String
-}
 
-struct OnboardingView: View {
-    // Sayfa verileri
-    let pages: [OnboardingPage] = [
-        OnboardingPage(image: "star", title: "Uygulamamıza Hoşgeldin!"),
-        OnboardingPage(image: "heart", title: "Favori içeriklerini kaydet."),
-        OnboardingPage(image: "bolt", title: "Hızlı ve kolay kullanım.")
-    ]
-    
-    // Aktif sayfa
+struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
+    @StateObject var viewModel : VM
+   
+ 
+  
     @State private var currentPage = 0
     
     var body: some View {
@@ -30,14 +22,14 @@ struct OnboardingView: View {
             Spacer()
             
             
-            Image(systemName: pages[currentPage].image)
+            Image(systemName: viewModel.getImageName())
                 .resizable()
                 .scaledToFit()
                 .frame(width: 150, height: 150)
                 .padding()
             
             
-            Text(pages[currentPage].title)
+            Text(viewModel.pages[currentPage].title)
                 .font(.title2)
                 .multilineTextAlignment(.center)
                 .padding()
@@ -46,13 +38,10 @@ struct OnboardingView: View {
             
             HStack {
                 
-                currentPage != 0 ?
+                viewModel.leftArrowButtonHidden ?
                 Button(action: {
-                    if currentPage != 0 {
-                        currentPage -= 1
-                    } else {
-                        print("Onboarding tamamlandı")
-                    }
+                    viewModel.currentPageDecrement()
+                    
                 }) {
                     Image(systemName: "arrow.left.circle.fill")
                         .resizable()
@@ -64,9 +53,9 @@ struct OnboardingView: View {
                 
                 
                 HStack(spacing: 8) {
-                    ForEach(0..<pages.count, id: \.self) { index in
+                    ForEach(0..<viewModel.pages.count, id: \.self) { index in
                         Circle()
-                            .fill(index == currentPage ? Color.blue : Color.gray.opacity(0.4))
+                            .fill(index == viewModel.currentPage ? Color.blue : Color.gray.opacity(0.4))
                             .frame(width: 10, height: 10)
                     }
                 }
@@ -76,17 +65,15 @@ struct OnboardingView: View {
                 
                 
                 
-                currentPage == pages.count - 1 ? AnyView(
+                viewModel.goToSingPage ? AnyView(
                     
                     Button(action: {
-                        print("Onboarding tamamlandı")
+                       
                     }) {
                         Text("Go To Sing PAge")
                     }
                 ) : AnyView(Button(action: {
-                    if currentPage < pages.count - 1 {
-                        currentPage += 1
-                    }
+                    viewModel.currentPageIncrement()
                 }) {
                     Image(systemName: "arrow.right.circle.fill")
                         .resizable()
@@ -101,12 +88,12 @@ struct OnboardingView: View {
             }
             .padding(.bottom, 30)
         }
-        .animation(.easeInOut, value: currentPage)
+        .animation(.easeInOut, value: viewModel.currentPage)
     }
 }
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView()
+        OnboardingView(viewModel: OnboardingViewModel())
     }
 }
