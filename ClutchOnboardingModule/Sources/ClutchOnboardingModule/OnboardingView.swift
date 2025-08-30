@@ -6,10 +6,7 @@
 //
 
 import SwiftUI
-
-import SwiftUI
-
-
+import ClutchCoreKit
 struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
     @StateObject var viewModel : VM
    
@@ -18,77 +15,90 @@ struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
     @State private var currentPage = 0
     
     var body: some View {
-        VStack {
-            Spacer()
+        
+        ZStack {
             
-            
-            Image(systemName: viewModel.getImageName())
+            Image(viewModel.getOnboardingPage().image.image)
                 .resizable()
-                .scaledToFit()
-                .frame(width: 150, height: 150)
-                .padding()
+                .scaledToFill()
+                .blur(radius: 6)
+                .ignoresSafeArea()
             
-            
-            Text(viewModel.pages[currentPage].title)
-                .font(.title2)
-                .multilineTextAlignment(.center)
-                .padding()
-            
-            Spacer()
-            
-            HStack {
+           
+            VStack(alignment:.center,spacing: 20) {
+                Image(viewModel.getOnboardingPage().image.image)
+                           .resizable()
+                           .scaledToFill()
+                           .frame(width: 250, height: 350)
+                           .clipShape(RoundedRectangle(cornerRadius: 60, style: .continuous))
+                           .overlay(
+                               RoundedRectangle(cornerRadius: 60, style: .continuous)
+                                   .stroke(Color.white, lineWidth: 5)
+                                   .shadow(radius: 5)
+                           ).padding(.top,10)
                 
-                viewModel.leftArrowButtonHidden ?
-                Button(action: {
-                    viewModel.currentPageDecrement()
-                    
-                }) {
-                    Image(systemName: "arrow.left.circle.fill")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.blue)
-                        .padding(.trailing, 20)
-                } : nil
+                Text(viewModel.getOnboardingPage().title)
+                    .font(.title2)
+                    .foregroundStyle(.white)
+                    .multilineTextAlignment(.center)
+                    .fontWeight(.semibold)
+                  
                 
                 
-                
-                HStack(spacing: 8) {
-                    ForEach(0..<viewModel.pages.count, id: \.self) { index in
-                        Circle()
-                            .fill(index == viewModel.currentPage ? Color.blue : Color.gray.opacity(0.4))
-                            .frame(width: 10, height: 10)
-                    }
-                }
-                .padding(.leading, 20)
+                Text(viewModel.getOnboardingPage().subTitle)
+                    .multilineTextAlignment(.center)
+                    .font(.headline)
+                    .foregroundStyle(.white)
+                  
+                    .lineLimit(.max)
+                    .padding(.horizontal,60)
+                  
+                  
                 
                 Spacer()
                 
-                
-                
-                viewModel.goToSingPage ? AnyView(
+                HStack {
+                    
                     
                     Button(action: {
-                       
+                         viewModel.onTappedSkip()
+                     }) {
+                         
+                         Text(viewModel.leftText)
+                             .font(.title2)
+                             .foregroundStyle(.white)
+                             .multilineTextAlignment(.center)
+                             .fontWeight(.light)
+                            
+                     }
+                    
+                  
+                    HStack(spacing: 8) {
+                        ForEach(0..<viewModel.getOnboardingPageCount(), id: \.self) { index in
+                            Circle()
+                                .fill(index == viewModel.currentPage ? Color.white : Color.gray.opacity(0.4))
+                                .frame(width: 10, height: 10)
+                        }
+                    }.padding(.horizontal,90)
+                    
+                   Button(action: {
+                        viewModel.currentPageIncrement()
                     }) {
-                        Text("Go To Sing PAge")
+                        
+                        Text(viewModel.rightText)
+                               .font(.title2)
+                               .foregroundStyle(.white)
+                               .multilineTextAlignment(.center)
+                               .fontWeight(.bold)
+                           
                     }
-                ) : AnyView(Button(action: {
-                    viewModel.currentPageIncrement()
-                }) {
-                    Image(systemName: "arrow.right.circle.fill")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.blue)
-                        .padding(.trailing, 20)
-                })
-                
-                
-                
-                
+                 
+                }
+               
             }
-            .padding(.bottom, 30)
-        }
-        .animation(.easeInOut, value: viewModel.currentPage)
+        } .animation(.easeInOut, value: viewModel.currentPage)
+        
+   
     }
 }
 
