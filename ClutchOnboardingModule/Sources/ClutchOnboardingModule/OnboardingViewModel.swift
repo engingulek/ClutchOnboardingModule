@@ -6,36 +6,54 @@
 //
 
 import Foundation
-
+import ClutchCoreKit
 protocol OnboardingViewModelProtocol: ObservableObject {
     var currentPage: Int { get }
-    var pages: [OnboardingPage] { get }
+   // var pages: [OnboardingPage] { get }
     var rightText: String { get }
+    var leftText : String {get}
+   
     
     
     func currentPageIncrement()
     
     func getOnboardingPage() -> OnboardingPage
+    func getOnboardingPageCount() -> Int
     func onTappedSkip()
 }
 
 class OnboardingViewModel: OnboardingViewModelProtocol {
     
-    @Published private(set) var currentPage: Int = 0
-    @Published private(set) var rightText: String = "Next"
+    @Published  var currentPage: Int = 0
+    @Published var rightText: String = LocalizableTheme.next.localized
+    var leftText: String = LocalizableTheme.skip.localized
+   
+   
     
     
-    let pages: [OnboardingPage] = [
-        OnboardingPage(image: "onboardingOne", title: "Uygulamamıza Hoşgeldin!"),
-        OnboardingPage(image: "onboardingOne", title: "Favori içeriklerini kaydet."),
-        OnboardingPage(image: "onboardingOne", title: "Hızlı ve kolay kullanım.")
+    private let pages: [OnboardingPage] = [
+        OnboardingPage(
+            image: .init(
+                image: .onboardingOne,
+                desc: "onboardingOne's image"),
+            title:LocalizableTheme.onboardingOneTitle.localized,
+            subTitle: LocalizableTheme.onboardingOneDesc.localized),
+        OnboardingPage(
+            image: .init(image: .onboardingTwo, desc: "onboardingOne's image"),
+            title: LocalizableTheme.onboardingTwoTitle.localized,
+            subTitle: LocalizableTheme.onboardingTwoDesc.localized),
+        OnboardingPage(
+            image: .init(image: .onboardingThree, desc: "onboardingOne's image"),
+            title: LocalizableTheme.onboardingThreeTitle.localized,
+            subTitle: LocalizableTheme.onboardingThreeDesc.localized)
+        
     ]
     
     func currentPageIncrement() {
        
         if currentPage < pages.count - 1 {
             currentPage += 1
-            rightText = (currentPage == pages.count - 1) ? "Login" : "Next"
+            rightText = (currentPage == pages.count - 1) ? LocalizableTheme.login.localized : LocalizableTheme.next.localized
         }
     }
     
@@ -47,6 +65,11 @@ class OnboardingViewModel: OnboardingViewModelProtocol {
     
     func onTappedSkip() {
         print("On Tappped Skip")
+    }
+    
+    
+    func getOnboardingPageCount() -> Int {
+        return pages.count
     }
    
 }

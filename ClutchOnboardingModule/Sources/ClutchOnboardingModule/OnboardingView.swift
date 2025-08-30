@@ -6,10 +6,7 @@
 //
 
 import SwiftUI
-
-import SwiftUI
-
-
+import ClutchCoreKit
 struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
     @StateObject var viewModel : VM
    
@@ -21,7 +18,7 @@ struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
         
         ZStack {
             
-            Image(.onboardingOne)
+            Image(viewModel.getOnboardingPage().image.image)
                 .resizable()
                 .scaledToFill()
                 .blur(radius: 6)
@@ -29,7 +26,7 @@ struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
             
            
             VStack(alignment:.center,spacing: 20) {
-                Image(.onboardingOne)
+                Image(viewModel.getOnboardingPage().image.image)
                            .resizable()
                            .scaledToFill()
                            .frame(width: 250, height: 350)
@@ -40,7 +37,7 @@ struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
                                    .shadow(radius: 5)
                            ).padding(.top,10)
                 
-                Text("Welcome to Clutch")
+                Text(viewModel.getOnboardingPage().title)
                     .font(.title2)
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.center)
@@ -48,7 +45,7 @@ struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
                   
                 
                 
-                Text("It is a long established fact that a reader will be  ")
+                Text(viewModel.getOnboardingPage().subTitle)
                     .multilineTextAlignment(.center)
                     .font(.headline)
                     .foregroundStyle(.white)
@@ -67,8 +64,7 @@ struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
                          viewModel.onTappedSkip()
                      }) {
                          
-                         Text("Skip")
-                            
+                         Text(viewModel.leftText)
                              .font(.title2)
                              .foregroundStyle(.white)
                              .multilineTextAlignment(.center)
@@ -78,7 +74,7 @@ struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
                     
                   
                     HStack(spacing: 8) {
-                        ForEach(0..<viewModel.pages.count, id: \.self) { index in
+                        ForEach(0..<viewModel.getOnboardingPageCount(), id: \.self) { index in
                             Circle()
                                 .fill(index == viewModel.currentPage ? Color.white : Color.gray.opacity(0.4))
                                 .frame(width: 10, height: 10)
@@ -100,7 +96,7 @@ struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
                 }
                
             }
-        }
+        } .animation(.easeInOut, value: viewModel.currentPage)
         
    
     }
