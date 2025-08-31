@@ -7,99 +7,66 @@
 
 import SwiftUI
 import ClutchCoreKit
+//MARK: -OnboardingView
 struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
+    
     @StateObject var viewModel : VM
-   
- 
-  
-    @State private var currentPage = 0
     
     var body: some View {
         
         ZStack {
-            
-            Image(viewModel.getOnboardingPage().image.image)
-                .resizable()
-                .scaledToFill()
-                .blur(radius: 6)
-                .ignoresSafeArea()
-            
-           
+            // background image
+            BackgroundImage(image: viewModel.getOnboardingPage().image.image)
+       
             VStack(alignment:.center,spacing: 20) {
-                Image(viewModel.getOnboardingPage().image.image)
-                           .resizable()
-                           .scaledToFill()
-                           .frame(width: 250, height: 350)
-                           .clipShape(RoundedRectangle(cornerRadius: 60, style: .continuous))
-                           .overlay(
-                               RoundedRectangle(cornerRadius: 60, style: .continuous)
-                                   .stroke(Color.white, lineWidth: 5)
-                                   .shadow(radius: 5)
-                           ).padding(.top,10)
+                // sub image
+               SubImage(image: viewModel.getOnboardingPage().image.image )
                 
-                Text(viewModel.getOnboardingPage().title)
-                    .font(.title2)
-                    .foregroundStyle(.white)
-                    .multilineTextAlignment(.center)
-                    .fontWeight(.semibold)
-                  
+                // title text
+                TextType(text: viewModel.getOnboardingPage().title,
+                         color: .white, fontType: .titleSB)
                 
-                
-                Text(viewModel.getOnboardingPage().subTitle)
-                    .multilineTextAlignment(.center)
-                    .font(.headline)
-                    .foregroundStyle(.white)
-                  
-                    .lineLimit(.max)
-                    .padding(.horizontal,60)
-                  
-                  
-                
+                // subtitle text
+                TextType(
+                    text: viewModel.getOnboardingPage().subTitle,
+                    color: .white,fontType: .titleTwoNormal)
+                .padding(.horizontal)
+              
                 Spacer()
                 
                 HStack {
+                    // left text button
+                    TextButton(
+                        text: viewModel.leftText,
+                        color: .white, fontType: FontType.titleTwoLight) {
+                            viewModel.onTappedSkip()
+                        }
                     
-                    
-                    Button(action: {
-                         viewModel.onTappedSkip()
-                     }) {
-                         
-                         Text(viewModel.leftText)
-                             .font(.title2)
-                             .foregroundStyle(.white)
-                             .multilineTextAlignment(.center)
-                             .fontWeight(.light)
-                            
-                     }
-                    
-                  
+                    // indicator
                     HStack(spacing: 8) {
-                        ForEach(0..<viewModel.getOnboardingPageCount(), id: \.self) { index in
+                        ForEach(0..<viewModel.getOnboardingPageCount(),
+                                id: \.self) { index in
                             Circle()
-                                .fill(index == viewModel.currentPage ? Color.white : Color.gray.opacity(0.4))
+                                .fill(index == viewModel.currentPage
+                                      ? Color.white
+                                      : Color.gray.opacity(0.4))
                                 .frame(width: 10, height: 10)
                         }
                     }.padding(.horizontal,90)
                     
-                   Button(action: {
-                        viewModel.currentPageIncrement()
-                    }) {
-                        
-                        Text(viewModel.rightText)
-                               .font(.title2)
-                               .foregroundStyle(.white)
-                               .multilineTextAlignment(.center)
-                               .fontWeight(.bold)
-                           
+                    // left text button
+                    TextButton(text: viewModel.rightText,
+                               color: .white,
+                               fontType: .titleTwoBold) {
+                        viewModel.onTappedRightButton()
                     }
-                 
                 }
-               
             }
         } .animation(.easeInOut, value: viewModel.currentPage)
         
-   
+        
     }
+    
 }
 
 struct OnboardingView_Previews: PreviewProvider {
