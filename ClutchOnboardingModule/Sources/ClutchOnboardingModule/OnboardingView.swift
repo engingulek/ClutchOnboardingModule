@@ -58,7 +58,7 @@ struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
                     TextButton(text: viewModel.rightText,
                                color: .white,
                                fontType: .titleTwoBold) {
-                        viewModel.currentPageIncrement()
+                        viewModel.onTappedRightButton()
                     }
                 }
             }

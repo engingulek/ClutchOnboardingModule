@@ -32,7 +32,13 @@ let package = Package(
             ],
            
            
-        )
+        ),
+        
+            .testTarget(
+                  name: "ClutchOnboardingModuleTests",
+                  dependencies: ["ClutchOnboardingModule"]
+              )
+        
         
         
     ]

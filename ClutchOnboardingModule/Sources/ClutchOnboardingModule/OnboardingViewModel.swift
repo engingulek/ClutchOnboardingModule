@@ -9,14 +9,11 @@ import Foundation
 import ClutchCoreKit
 protocol OnboardingViewModelProtocol: ObservableObject {
     var currentPage: Int { get }
-   // var pages: [OnboardingPage] { get }
     var rightText: String { get }
     var leftText : String {get}
    
     
-    
-    func currentPageIncrement()
-    
+    func onTappedRightButton()
     func getOnboardingPage() -> OnboardingPage
     func getOnboardingPageCount() -> Int
     func onTappedSkip()
@@ -28,8 +25,6 @@ class OnboardingViewModel: OnboardingViewModelProtocol {
     @Published var rightText: String = LocalizableTheme.next.localized
     var leftText: String = LocalizableTheme.skip.localized
    
-   
-    
     
     private let pages: [OnboardingPage] = [
         OnboardingPage(
@@ -49,7 +44,7 @@ class OnboardingViewModel: OnboardingViewModelProtocol {
         
     ]
     
-    func currentPageIncrement() {
+    func onTappedRightButton() {
        
         if currentPage < pages.count - 1 {
             currentPage += 1
