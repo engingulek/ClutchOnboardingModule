@@ -1,5 +1,5 @@
 {
-  "originHash" : "79440f214881394bdfc3691823d35b23d90dc0b0021906a9e82cdc21023a07fb",
+  "originHash" : "5b50bc6d9614dcdfd1a34d2465b903b5034c25403c78a721a245d6df39207f99",
   "pins" : [
     {
       "identity" : "clutchcorekit",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "afdf72fa6458b0a1d9cae443fcdc79d445b5cc1b",
         "version" : "0.1.1"
+      }
+    },
+    {
+      "identity" : "clutchmodularprotocols",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/engingulek/ClutchModularProtocols.git",
+      "state" : {
+        "revision" : "c79a6dfa3b61d1db4a27c2e9c66cef15160e1c03",
+        "version" : "0.0.1"
       }
     }
   ],
