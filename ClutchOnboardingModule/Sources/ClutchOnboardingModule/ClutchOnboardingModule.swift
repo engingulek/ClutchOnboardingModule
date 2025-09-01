@@ -1,2 +1,17 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
+
+import Foundation
+import SwiftUI
+import ClutchModularProtocols
+
+//MARK: - ClutchOnboardingMoule:
+
+public class ClutchOnboardingModule : OnboardingModuleProtocol {
+    public func createOnboardingModuleView() -> AnyView {
+        let view = OnboardingView(viewModel: OnboardingViewModel())
+        return AnyView(view)
+    }
+    
+    
+}
