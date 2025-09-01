@@ -8,6 +8,9 @@ import ClutchModularProtocols
 //MARK: - ClutchOnboardingMoule:
 
 public class ClutchOnboardingModule : OnboardingModuleProtocol {
+
+      public init() { }
+    
     public func createOnboardingModuleView() -> AnyView {
         let view = OnboardingView(viewModel: OnboardingViewModel())
         return AnyView(view)
