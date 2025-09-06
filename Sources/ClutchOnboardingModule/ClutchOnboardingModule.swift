@@ -7,11 +7,11 @@ import ClutchModularProtocols
 
 //MARK: - ClutchOnboardingMoule:
 
-public class ClutchOnboardingModule : OnboardingModuleProtocol {
+public class ClutchOnboardingModule : @preconcurrency OnboardingModuleProtocol {
 
       public init() { }
     
-    public func createOnboardingModuleView() -> AnyView {
+    @MainActor public func createOnboardingModuleView() -> AnyView {
         let view = OnboardingView(viewModel: OnboardingViewModel())
         return AnyView(view)
     }

@@ -7,11 +7,12 @@
 
 import SwiftUI
 import ClutchCoreKit
+import ClutchNavigationKit
 //MARK: -OnboardingView
 struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
     
     @StateObject var viewModel : VM
-    
+    @EnvironmentObject var navigation:Navigation
     var body: some View {
         
         ZStack {
@@ -58,7 +59,8 @@ struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
                     TextButton(text: viewModel.rightText,
                                color: .white,
                                fontType: .titleTwoBold) {
-                        viewModel.onTappedRightButton()
+                       // viewModel.onTappedRightButton()
+                        navigation.push(.account)
                     }
                 }
             }

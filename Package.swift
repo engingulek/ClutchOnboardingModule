@@ -19,7 +19,9 @@ let package = Package(
     dependencies: [
         
        .package(url: "https://github.com/engingulek/ClutchCoreKit",from: "0.1.1"),
-       .package(url: "https://github.com/engingulek/ClutchModularProtocols",from: "0.0.1")
+       .package(url: "https://github.com/engingulek/ClutchModularProtocols",from: "0.0.1"),
+       .package(url: "https://github.com/engingulek/ClutchNavigationKit",from: "0.0.2")
+       //
        
     ],
     targets: [
@@ -31,7 +33,8 @@ let package = Package(
             dependencies: [
                 
                 .product(name: "ClutchCoreKit", package: "ClutchCoreKit"),
-                .product(name: "ClutchModularProtocols", package: "ClutchModularProtocols")
+                .product(name: "ClutchModularProtocols", package: "ClutchModularProtocols"),
+                .product(name: "ClutchNavigationKit", package: "ClutchNavigationKit")
             ],
            
            
