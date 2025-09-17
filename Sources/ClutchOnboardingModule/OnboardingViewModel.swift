@@ -8,6 +8,7 @@
 import Foundation
 import ClutchCoreKit
 
+
 // MARK: - OnboardingViewModelProtocol
 /// Protocol defining the behavior of an onboarding view model.
 protocol OnboardingViewModelProtocol: ObservableObject {
@@ -20,6 +21,8 @@ protocol OnboardingViewModelProtocol: ObservableObject {
     
     /// Text shown on the left button.
     var leftText: String { get }
+    /// // To trigger navigation
+    var onFinish: (() -> Void)? { get set }
     
     /// Moves to the next page or updates right button text if last page.
     func onTappedRightButton()
@@ -30,8 +33,10 @@ protocol OnboardingViewModelProtocol: ObservableObject {
     /// Returns total number of onboarding pages.
     func getOnboardingPageCount() -> Int
     
-    /// Skip Button Action
-    func onTappedSkip()
+    func onTappedSkipButton()
+    
+  
+    
 }
 
 // MARK: - OnboardingViewModel
@@ -41,21 +46,21 @@ class OnboardingViewModel: OnboardingViewModelProtocol {
     @Published var currentPage: Int = 0
     @Published var rightText: String = LocalizableTheme.next.localized
     var leftText: String = LocalizableTheme.skip.localized
-    
+    var onFinish: (() -> Void)?
     /// Predefined onboarding pages.
     private let pages: [OnboardingPage] = [
         OnboardingPage(
-            image: .init(image: .onboardingOne, desc: "onboardingOne's image"),
+            image: .init(image: .onboardingOne, desc: "onboardingFirst's image"),
             title: LocalizableTheme.onboardingOneTitle.localized,
             subTitle: LocalizableTheme.onboardingOneDesc.localized
         ),
         OnboardingPage(
-            image: .init(image: .onboardingTwo, desc: "onboardingOne's image"),
+            image: .init(image: .onboardingTwo, desc: "onboardingSecond's image"),
             title: LocalizableTheme.onboardingTwoTitle.localized,
             subTitle: LocalizableTheme.onboardingTwoDesc.localized
         ),
         OnboardingPage(
-            image: .init(image: .onboardingThree, desc: "onboardingOne's image"),
+            image: .init(image: .onboardingThree, desc: "onboardingThird's image"),
             title: LocalizableTheme.onboardingThreeTitle.localized,
             subTitle: LocalizableTheme.onboardingThreeDesc.localized
         )
@@ -66,21 +71,21 @@ class OnboardingViewModel: OnboardingViewModelProtocol {
         if currentPage < pages.count - 1 {
             currentPage += 1
             rightText = (currentPage == pages.count - 1)
-                ? LocalizableTheme.login.localized
+            ? LocalizableTheme.login.localized
                 : LocalizableTheme.next.localized
+        }else{
+            onFinish?()
         }
+    }
+    
+    func onTappedSkipButton() {
+        onFinish?()
     }
     
     
     func getOnboardingPage() -> OnboardingPage {
         return pages[currentPage]
     }
-    
-
-    func onTappedSkip() {
-        print("On Tapped Skip")
-    }
-    
    
     func getOnboardingPageCount() -> Int {
         return pages.count
