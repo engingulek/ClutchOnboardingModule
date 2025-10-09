@@ -20,7 +20,7 @@ let package = Package(
         
        .package(url: "https://github.com/engingulek/ClutchCoreKit",from: "0.2.0"),
        .package(url: "https://github.com/engingulek/ClutchModularProtocols",from: "0.0.1"),
-       .package(url: "https://github.com/engingulek/ClutchNavigationKit",from: "0.0.2")
+       .package(url: "https://github.com/engingulek/ClutchNavigationKit",from: "0.0.8")
        //
        
     ],
