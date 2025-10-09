@@ -1,13 +1,13 @@
 {
-  "originHash" : "6ccab3178ff645c652f3f3f3777d388a07eb85a271851d7185b128ab67b59d73",
+  "originHash" : "08d4e438d74416d4390dda79f54b5cdf40810271efd0ec5ddda02b2df81adf86",
   "pins" : [
     {
       "identity" : "clutchcorekit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/engingulek/ClutchCoreKit",
       "state" : {
-        "revision" : "906853cd938bfc59ff844a972491c651f221131a",
-        "version" : "0.2.0"
+        "revision" : "7845869c7d20c32d5f0208bfcc41a1410ce91e6d",
+        "version" : "0.2.4"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/engingulek/ClutchNavigationKit",
       "state" : {
-        "revision" : "91c02448a90f2ca4ca6249b14361354b38554bbd",
-        "version" : "0.0.9"
+        "branch" : "develop",
+        "revision" : "d98a617990e287e410e2ebfc4be7b0a6ebaaf408"
       }
     },
     {

@@ -74,7 +74,7 @@ struct OnboardingView<VM:OnboardingViewModelProtocol>: View {
                 // Navigation shutdown setting is being made
                 viewModel.onFinish = {
                   
-                    navigation.setRoot(.account)
+                   
                  
                 }
             }
