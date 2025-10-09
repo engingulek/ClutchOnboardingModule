@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/engingulek/ClutchNavigationKit",
       "state" : {
-        "revision" : "77c221a0ff557d0b1bb241e0191e9b32a60a6a52",
-        "version" : "0.0.8"
+        "revision" : "91c02448a90f2ca4ca6249b14361354b38554bbd",
+        "version" : "0.0.9"
       }
     },
     {
