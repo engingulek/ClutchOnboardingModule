@@ -1,5 +1,5 @@
 {
-  "originHash" : "08d4e438d74416d4390dda79f54b5cdf40810271efd0ec5ddda02b2df81adf86",
+  "originHash" : "967c80b3b677287b57048a17e4d8506479c9fcc542285b9b2ea3ed5c26b7a1bf",
   "pins" : [
     {
       "identity" : "clutchcorekit",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "7845869c7d20c32d5f0208bfcc41a1410ce91e6d",
         "version" : "0.2.4"
+      }
+    },
+    {
+      "identity" : "clutchmanagerkits",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/engingulek/ClutchManagerKits",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "fab8f656d55bd6dcdd952547cdabfe05425671c4"
       }
     },
     {

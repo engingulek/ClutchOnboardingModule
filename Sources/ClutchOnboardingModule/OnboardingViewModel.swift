@@ -7,6 +7,7 @@
 
 import Foundation
 import ClutchCoreKit
+import ClutchManagerKits
 
 
 // MARK: - OnboardingViewModelProtocol
@@ -47,6 +48,7 @@ class OnboardingViewModel: OnboardingViewModelProtocol {
     @Published var rightText: String = LocalizableTheme.next.localized
     var leftText: String = LocalizableTheme.skip.localized
     var onFinish: (() -> Void)?
+    private let pageManager : PageManagerProtocol = PageManager()
     /// Predefined onboarding pages.
     private let pages: [OnboardingPage] = [
         OnboardingPage(
@@ -75,11 +77,13 @@ class OnboardingViewModel: OnboardingViewModelProtocol {
                 : LocalizableTheme.next.localized
         }else{
             onFinish?()
+            pageManager.pageManagerAction(action: .account)
         }
     }
     
     func onTappedSkipButton() {
         onFinish?()
+        pageManager.pageManagerAction(action: .account)
     }
     
     

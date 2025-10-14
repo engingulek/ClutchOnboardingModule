@@ -7,7 +7,7 @@ let package = Package(
     name: "ClutchOnboardingModule",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v17)
+        .iOS(.v18)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
@@ -20,7 +20,8 @@ let package = Package(
         
        .package(url: "https://github.com/engingulek/ClutchCoreKit",from: "0.2.0"),
        .package(url: "https://github.com/engingulek/ClutchModularProtocols",from: "0.0.1"),
-       .package(url: "https://github.com/engingulek/ClutchNavigationKit",branch: "develop")
+       .package(url: "https://github.com/engingulek/ClutchNavigationKit",branch: "develop"),
+       .package(url: "https://github.com/engingulek/ClutchManagerKits", branch: "develop")
        //
        
     ],
@@ -34,7 +35,8 @@ let package = Package(
                 
                 .product(name: "ClutchCoreKit", package: "ClutchCoreKit"),
                 .product(name: "ClutchModularProtocols", package: "ClutchModularProtocols"),
-                .product(name: "ClutchNavigationKit", package: "ClutchNavigationKit")
+                .product(name: "ClutchNavigationKit", package: "ClutchNavigationKit"),
+                .product(name: "ClutchManagerKits", package: "ClutchManagerKits")
             ],
            
            
