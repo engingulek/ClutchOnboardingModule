@@ -1,5 +1,5 @@
 {
-  "originHash" : "967c80b3b677287b57048a17e4d8506479c9fcc542285b9b2ea3ed5c26b7a1bf",
+  "originHash" : "bcada99cfe3c39f2b741d8422ffdb769efbd5d93d04b6d729d91dfcd7010d3c7",
   "pins" : [
     {
       "identity" : "clutchcorekit",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/engingulek/ClutchManagerKits",
       "state" : {
         "branch" : "develop",
-        "revision" : "fab8f656d55bd6dcdd952547cdabfe05425671c4"
+        "revision" : "6b05dc69335f4450ea6b9dc4f95728b5786b5a95"
       }
     },
     {

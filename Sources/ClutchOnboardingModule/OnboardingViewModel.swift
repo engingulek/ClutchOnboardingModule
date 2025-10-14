@@ -77,13 +77,13 @@ class OnboardingViewModel: OnboardingViewModelProtocol {
                 : LocalizableTheme.next.localized
         }else{
             onFinish?()
-            pageManager.pageManagerAction(action: .account)
+            pageManager.handle(.markAppAsLaunched)
         }
     }
     
     func onTappedSkipButton() {
         onFinish?()
-        pageManager.pageManagerAction(action: .account)
+        pageManager.handle(.markAppAsLaunched)
     }
     
     
