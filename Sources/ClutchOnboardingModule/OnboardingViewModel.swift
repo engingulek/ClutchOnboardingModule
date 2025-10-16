@@ -48,7 +48,7 @@ class OnboardingViewModel: OnboardingViewModelProtocol {
     @Published var rightText: String = LocalizableTheme.next.localized
     var leftText: String = LocalizableTheme.skip.localized
     var onFinish: (() -> Void)?
-    private let pageManager : PageManagerProtocol = PageManager()
+    private let pageManager : FirstPageManagerProtocol = FirstPageManager()
     /// Predefined onboarding pages.
     private let pages: [OnboardingPage] = [
         OnboardingPage(
